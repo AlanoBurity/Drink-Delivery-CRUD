@@ -1,14 +1,14 @@
 const express = require('express');
-const connection = require('./db/connection');
+const connection = require('./model/db/connection');
 
 const app = express();
+const { productModel } = require('./model');
 
 app.use(express.json());
 
 app.get('/products', async (_req, res) => {
-    const [result] = await connection.execute(
-        'SELECT * FROM products',
-);
+ const result = await productModel.getAllItems();
+
         res.status(200).json(result);
 });
 
